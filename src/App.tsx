@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+
+import Input from './components/Input';
+
+import { Clean } from './utils/icons';
 
 const App = () => {
-	const [count, setCount] = useState(0);
-
-	const addCount = () => {
-		setCount(count + 1);
-	};
+	const [value, setValue] = useState('');
 
 	return (
 		<View style={styles.container}>
-			<Text>Hello World!!!</Text>
-			<Text testID="count">{count}</Text>
-			<TouchableOpacity testID="buttonAddCount" onPress={addCount}>
-				<Text>Add</Text>
-			</TouchableOpacity>
+			<Input
+				placeholder="Valor unitário"
+				onChangeText={(text) => {
+					setValue(text);
+				}}
+				value={value}
+				rightElement={
+					<TouchableOpacity testID="clean" onPress={() => setValue('')}>
+						<Clean width={20} height={20} />
+					</TouchableOpacity>
+				}
+			/>
 		</View>
 	);
 };
