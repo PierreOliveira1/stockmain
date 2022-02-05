@@ -14,4 +14,9 @@ const unmaskCurrency = (value: string): number => {
 	return Number(value);
 };
 
-export { maskCurrency, unmaskCurrency };
+const maskNumber = (value: string): string => {
+    value = value.replace(/\D/g, '');
+	return value;
+};
+
+export { maskCurrency, unmaskCurrency, maskNumber };

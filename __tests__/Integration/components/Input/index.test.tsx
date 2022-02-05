@@ -31,6 +31,24 @@ describe('Component Input', () => {
 		expect(value).toBe('R$ 1.500,35');
 	});
 
+	test('should input mask number', () => {
+		let value = '';
+		const { queryByPlaceholderText } = render(
+			<Input
+				placeholder="number"
+				mask="number"
+				onChangeText={(text) => (value = text)}
+				value={value}
+			/>,
+		);
+
+		const input = queryByPlaceholderText('number');
+		expect(input).toBeTruthy();
+
+		fireEvent.changeText(input, '1B5003A5');
+		expect(value).toBe('150035');
+	});
+
 	test('should clean text of input with right element', () => {
 		let value = '';
 		const { queryByPlaceholderText, queryByTestId } = render(

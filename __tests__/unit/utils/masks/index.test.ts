@@ -1,4 +1,4 @@
-import { maskCurrency, unmaskCurrency } from '../../../../src/utils/masks';
+import { maskCurrency, maskNumber, unmaskCurrency } from '../../../../src/utils/masks';
 
 describe('Masks', () => {
 	test('should return value of formated currency', () => {
@@ -12,6 +12,13 @@ describe('Masks', () => {
 		const value = 'R$ 1.500,35';
 		const expected = 1500.35;
 		const result = unmaskCurrency(value);
+		expect(result).toBe(expected);
+	});
+
+	test('should return only number', () => {
+		const value = '150B035A';
+		const expected = '150035';
+		const result = maskNumber(value);
 		expect(result).toBe(expected);
 	});
 });

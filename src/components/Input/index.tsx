@@ -1,9 +1,15 @@
 import React from 'react';
-import { KeyboardTypeOptions, View } from 'react-native';
+import { KeyboardTypeOptions } from 'react-native';
 
-import { Container, Error, RightElement, TextInput } from './styles';
+import {
+	InputContainer,
+	Error,
+	RightElement,
+	TextInput,
+	Container,
+} from './styles';
 
-import { maskCurrency } from '../../utils/masks';
+import { maskCurrency, maskNumber } from '../../utils/masks';
 
 interface Props {
 	placeholder: string;
@@ -11,7 +17,7 @@ interface Props {
 	height?: string;
 	keyboardType?: KeyboardTypeOptions;
 	rightElement?: JSX.Element;
-	mask?: 'currency';
+	mask?: 'currency' | 'number';
 	onChangeText?: (text: string) => void;
 	value?: string;
 	error?: string;
@@ -29,22 +35,26 @@ const Input = ({
 	error,
 }: Props): JSX.Element => {
 	const handleChangeText = (text: string) => {
-		if (mask === 'currency' && onChangeText) {
-			const textMask = maskCurrency(text);
-			onChangeText(textMask);
-		} else if (onChangeText) {
-			onChangeText(text);
-		}
+		if (onChangeText)
+			switch (mask) {
+				case 'currency':
+					onChangeText(maskCurrency(text));
+					break;
+				case 'number':
+					onChangeText(maskNumber(text));
+					break;
+				default:
+					onChangeText(text);
+			}
 	};
 
 	const onFocus = () => {
-		if (mask === 'currency') handleChangeText('000');
+		if (mask === 'currency' && value === '') handleChangeText('000');
 	};
 
 	return (
-		<View>
-			<Container
-				width={width}
+		<Container width={width}>
+			<InputContainer
 				height={height}
 				shadowColor={error ? '#DF0000' : '#000'}
 				borderColor={error ? '#DF0000' : 'transparent'}
@@ -59,9 +69,9 @@ const Input = ({
 					onFocus={onFocus}
 				/>
 				{rightElement && <RightElement>{rightElement}</RightElement>}
-			</Container>
+			</InputContainer>
 			{error && <Error>{error}</Error>}
-		</View>
+		</Container>
 	);
 };
 
