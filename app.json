@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "stockmain",
-    "slug": "stockmain",
+    "name": "StockMain",
+    "slug": "StockMain",
     "entryPoint": "./src/index.tsx",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,12 +19,6 @@
     ],
     "ios": {
       "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./src/assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
     }
   }
 }
