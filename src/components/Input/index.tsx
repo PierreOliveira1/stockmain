@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardTypeOptions } from 'react-native';
+import { Keyboard, KeyboardTypeOptions } from 'react-native';
 
 import {
 	InputContainer,
@@ -19,6 +19,7 @@ interface Props {
 	rightElement?: JSX.Element;
 	mask?: 'currency' | 'number';
 	onChangeText?: (text: string) => void;
+	onSubmitEditing?: () => void;
 	value?: string;
 	error?: string;
 }
@@ -30,6 +31,7 @@ const Input = ({
 	keyboardType,
 	rightElement,
 	mask,
+	onSubmitEditing,
 	onChangeText,
 	value,
 	error,
@@ -65,6 +67,7 @@ const Input = ({
 					placeholderTextColor="#8A8A8A"
 					keyboardType={keyboardType}
 					onChangeText={handleChangeText}
+					onSubmitEditing={onSubmitEditing || Keyboard.dismiss}
 					value={value}
 					onFocus={onFocus}
 				/>

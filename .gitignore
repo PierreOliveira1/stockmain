@@ -10,6 +10,8 @@ npm-debug.*
 *.orig.*
 web-build/
 .expo-shared/
+yarn-error.log
+yarn.lock
 
 # macOS
 .DS_Store

@@ -19,4 +19,15 @@ const maskNumber = (value: string): string => {
 	return value;
 };
 
-export { maskCurrency, unmaskCurrency, maskNumber };
+const maskValueTotal = (value: string): string => {
+	if (value.includes('.'))
+		value = value.replace('.', ',');
+	else value += ',00';
+	value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
+	if (value.split(',')[1].length > 2)
+		value = value.split(',')[0] + ',' + value.split(',')[1].substring(0, 2);
+	value = "R$ " + value;
+	return value;
+};
+
+export { maskCurrency, unmaskCurrency, maskNumber, maskValueTotal };
